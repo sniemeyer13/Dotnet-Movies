@@ -8,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
 
 namespace MvcMovie
 {
@@ -25,7 +28,7 @@ namespace MvcMovie
             services.AddMvc();
 
             services.AddDbContext<MvcMovieContext>(options =>
-                  options.UseSqlite("Data Source=MvcMovie.db"));
+                  options.UseMySql(Configuration));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
